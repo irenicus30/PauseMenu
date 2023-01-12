@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgpidk1evximd"]
+
+[ext_resource type="PackedScene" uid="uid://xh0011fjbfnb" path="res://pause_menu.tscn" id="1_1qcbk"]
+[ext_resource type="Script" path="res://main.gd" id="1_2xg04"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rsyov"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k1bta"]
+
+[sub_resource type="Sky" id="Sky_ed7g4"]
+sky_material = SubResource("ProceduralSkyMaterial_k1bta")
+
+[sub_resource type="Environment" id="Environment_k18dg"]
+background_mode = 2
+sky = SubResource("Sky_ed7g4")
+ambient_light_source = 3
+ssil_enabled = true
+sdfgi_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_nu0qk"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2xg04")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_rsyov")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k18dg")
+camera_attributes = SubResource("CameraAttributesPractical_nu0qk")
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_1qcbk")]
